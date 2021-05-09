@@ -15,8 +15,7 @@ class CaesarTransform extends stream.Transform {
       result = code(data, this.shift, this.action);
     }
 
-    this.push(result);
-    this.push('\n');
+    this.push(result.concat('\n'));
     callback();
   }
 }

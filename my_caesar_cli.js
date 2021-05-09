@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const { pipeline } = require('stream');
 const { program } = require('commander');
 const CaesarTransform = require('./utils/transform');
@@ -30,13 +32,39 @@ if (!Number.isInteger(Number(options.shift))) {
   process.exit(1);
 }
 
-const read = process.stdin;
+const inputFile = options.input ? path.resolve(options.input) : '';
 
-const write = process.stdout;
+if (inputFile) {
+  fs.access(inputFile, fs.constants.F_OK | fs.constants.R_OK, (err) => {
+    if (err) {
+      process.stderr.write(`Input file ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}.`);
+      process.exit(1);
+    }
+  });
+}
+
+const outputFile = options.output ? path.resolve(options.output) : '';
+
+if (outputFile) {
+  fs.access(outputFile, fs.constants.F_OK | fs.constants.W_OK, (err) => {
+    if (err) {
+      process.stderr.write(`Output file ${err.code === 'ENOENT' ? 'does not exist' : 'is read-only'}.`);
+      process.exit(1);
+    }
+  });
+}
+
+const inputSrc = inputFile
+  ? fs.createReadStream(inputFile)
+  : process.stdin;
+
+const outputSrc = outputFile
+  ? fs.createWriteStream(outputFile, { flags: 'a' })
+  : process.stdout;
 
 pipeline(
-  read,
+  inputSrc,
   new CaesarTransform(options.action, options.shift),
-  write,
+  outputSrc,
   handleError,
 );
