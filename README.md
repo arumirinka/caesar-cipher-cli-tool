@@ -15,10 +15,10 @@ CLI tool accepts 4 options (short alias or full name):
 3.  **-o, --output**: an output file
 4.  **-a, --action**: an action encode/decode
 
-Shift and action are required. 
+**Shift** (an integer) and **action** (_encode_ or _decode_) are required. 
 
-If the input file is missed - stdin is used as an input source.  
-If the output file is missed - stdout is used as an output destination.
+If the **input** file is missed - stdin is used as an input source.  
+If the **output** file is missed - stdout is used as an output destination.
 
 ## Usage examples
 1. _-a (--action)_ is **encode**
