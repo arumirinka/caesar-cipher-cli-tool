@@ -20,6 +20,16 @@ const handleError = (err) => {
   }
 }
 
+if (options.action !== 'decode' && options.action !== 'encode') {
+  process.stderr.write('Error: action should be either decode or encode!');
+  process.exit(1);
+}
+
+if (!Number.isInteger(Number(options.shift))) {
+  process.stderr.write('Error: shift should be an integer!');
+  process.exit(1);
+}
+
 const read = process.stdin;
 
 const write = process.stdout;
