@@ -1,10 +1,11 @@
 # Caesar cipher CLI tool
 
-**A CLI tool that encodes and decodes a text by [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)**.
+**A command line interface tool that encodes and decodes a text by [Caesar cipher](https://en.wikipedia.org/wiki/Caesar_cipher)**.
 
-1. Checkout to the `caesar-cipher-cli-tool` branch.  
-2. Run `npm install`.
-3. Have fun!
+1. Clone this repository.
+2. Checkout to the `caesar-cipher-cli-tool` branch.  
+3. Run `npm install`.
+4. Have fun!
 
 ## Caesar cipher
 
